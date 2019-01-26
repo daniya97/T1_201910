@@ -112,13 +112,13 @@ public class ArregloDinamico implements IArregloDinamico {
 			//Copiar los elementos menos el que se elimina
 			for (int i = 0; i < auxiliar.length; i++) {
 				
-				if (!elementos[i].equals(dato)) {
+				if (elementos[i].compareTo(dato)==0) {
+					buscado = elementos[i];
 					
-					auxiliar[contador] = elementos[i];
 				}
 				else
 				{
-					buscado = elementos[i];
+					auxiliar[contador] = elementos[i];
 				}
 				
 			}
