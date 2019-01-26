@@ -51,6 +51,9 @@ public class ArregloDinamico implements IArregloDinamico {
 
 		public int darTamano() {
 			// TODO implementar
+			
+			tamanoAct = elementos.length;
+			
 			return tamanoAct;
 		}
 
