@@ -60,7 +60,13 @@ public class ArregloDinamico implements IArregloDinamico {
 		public String darElemento(int i) {
 			// TODO implementar
 			
-			String elemento = elementos[i];
+			String elemento = null;
+			
+			if (! elementos[i].equals(null) ) {
+			
+				elemento = elementos[i];
+			}
+			
 			return elemento;
 		}
 
@@ -85,6 +91,40 @@ public class ArregloDinamico implements IArregloDinamico {
 		public String eliminar(String dato) {
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			return null;
+			
+			
+			
+			String buscado = null;
+			
+			//Si el arrelgo está vacío
+			if(elementos == null)
+			{
+				return null;
+			}
+			
+			//Arreglo  auxiliar
+			String [] auxiliar = new String [elementos.length-1];
+			
+			
+			
+			
+			int contador = 0;
+			//Copiar los elementos menos el que se elimina
+			for (int i = 0; i < auxiliar.length; i++) {
+				
+				if (!elementos[i].equals(dato)) {
+					
+					auxiliar[contador] = elementos[i];
+				}
+				else
+				{
+					buscado = elementos[i];
+				}
+				
+			}
+			
+			elementos = auxiliar;
+			
+			return buscado;
 		}
 }
