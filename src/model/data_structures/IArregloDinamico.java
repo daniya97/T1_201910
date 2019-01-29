@@ -13,7 +13,7 @@ public interface IArregloDinamico <K> {
 	 * @param i posicion de consulta
 	 * @return elemento de consulta. null si no hay elemento en posicion.
 	 */
-	String darElemento( int i );
+	K darElemento( int i );
 
 	/**
 	 * Agregar un dato de forma compacta (en la primera casilla disponible) 
@@ -27,7 +27,7 @@ public interface IArregloDinamico <K> {
 	 * @param dato Objeto de busqueda en el arreglo
 	 * @return elemento encontrado en el arreglo (si existe). null si no se encontro el dato.
 	 */
-	String buscar(K dato);
+	K buscar(K dato);
 	
 	/**
 	 * Eliminar un dato del arreglo.
@@ -35,6 +35,6 @@ public interface IArregloDinamico <K> {
 	 * @param dato Objeto de eliminacion en el arreglo
 	 * @return dato eliminado
 	 */
-	String eliminar( K dato );
+	K eliminar( K dato );
 
 }

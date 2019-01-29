@@ -7,7 +7,7 @@ package model.data_structures;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico <K> implements IArregloDinamico {
+public class ArregloDinamico <K>  implements IArregloDinamico <K> {
 		/**
 		 * Capacidad maxima del arreglo
 		 */
@@ -27,7 +27,7 @@ public class ArregloDinamico <K> implements IArregloDinamico {
          */
 		public ArregloDinamico( int max )
         {
-               elementos = new K[max];
+               elementos = (K[]) new Object[max];
                tamanoMax = max;
                tamanoAct = 0;
         }
@@ -38,7 +38,7 @@ public class ArregloDinamico <K> implements IArregloDinamico {
                {  // caso de arreglo lleno (aumentar tamaNo)
                     tamanoMax = 2 * tamanoMax;
                     K [ ] copia = elementos;
-                    elementos = new K[tamanoMax];
+                    elementos = (K[]) new Object[tamanoMax];
                     for ( int i = 0; i < tamanoAct; i++)
                     {
                      	 elementos[i] = copia[i];
@@ -51,35 +51,80 @@ public class ArregloDinamico <K> implements IArregloDinamico {
 
 		public int darTamano() {
 			// TODO implementar
+			
+			tamanoAct = elementos.length;
+			
 			return tamanoAct;
 		}
 
 		public K darElemento(int i) {
 			// TODO implementar
 			
-			K elemento = elementos[i];
+			K elemento = null;
+			
+			if (! elementos[i].equals(null) ) {
+			
+				elemento = elementos[i];
+			}
+			
 			return elemento;
 		}
 
-		public String buscar(String dato) {
+		public K buscar(K dato) {
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 			
-			String elementoBuscado = null;
+			K elementoEncontrado = null;
+			
 			for (int i = 0; i < elementos.length; i++) {
 				
-				if (elementos[i].compareTo(dato)==0) {
-					elementoBuscado = elementos[i];
+				if (elementos[i].equals(dato)) {
+					elementoEncontrado = elementos[i];
 				}
+				
 			}
 			
-			return elementoBuscado;
+			
+			return elementoEncontrado;
 		}
 
-		public String eliminar(String dato) {
+		public K eliminar(K dato) {
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 			
-			return null;
+			
+			
+			K buscado = null;
+			
+			//Si el arrelgo está vacío
+			if(elementos == null)
+			{
+				return null;
+			}
+			
+			//Arreglo  auxiliar
+			K [] auxiliar = (K[]) new Object[elementos.length-1];
+			
+			
+			
+			
+			int contador = 0;
+			//Copiar los elementos menos el que se elimina
+			for (int i = 0; i < auxiliar.length; i++) {
+				
+				if (elementos[i].equals(dato)) {
+					buscado = elementos[i];
+					
+				}
+				else
+				{
+					auxiliar[contador] = elementos[i];
+				}
+				
+			}
+			
+			elementos = auxiliar;
+			
+			return buscado;
 		}
 }
