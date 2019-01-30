@@ -50,81 +50,84 @@ public class ArregloDinamico implements IArregloDinamico {
        }
 
 		public int darTamano() {
-			// TODO implementar
-			
-			tamanoAct = elementos.length;
-			
 			return tamanoAct;
 		}
 
 		public String darElemento(int i) {
 			// TODO implementar
 			
-			String elemento = null;
-			
-			if (! elementos[i].equals(null) ) {
-			
-				elemento = elementos[i];
-			}
-			
-			return elemento;
-		}
-
-		public String buscar(String dato) {
-			// TODO implementar
-			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			
-			String elementoEncontrado = null;
-			
-			for (int i = 0; i < elementos.length; i++) {
-				
-				if (elementos[i].compareTo(dato)== 0) {
-					elementoEncontrado = elementos[i];
-				}
-				
-			}
-			
-			
-			return elementoEncontrado;
-		}
-
-		public String eliminar(String dato) {
-			// TODO implementar
-			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			
-			
-			
-			String buscado = null;
-			
-			//Si el arrelgo está vacío
-			if(elementos == null)
-			{
+			if (i>=tamanoAct) {
 				return null;
 			}
 			
-			//Arreglo  auxiliar
-			String [] auxiliar = new String [elementos.length-1];
+			return elementos[i];
 			
+		}
+
+		public String buscar(String dato) {
+
+			Boolean encontrado = false;
 			
-			
-			
-			int contador = 0;
-			//Copiar los elementos menos el que se elimina
-			for (int i = 0; i < auxiliar.length; i++) {
-				
-				if (elementos[i].compareTo(dato)==0) {
-					buscado = elementos[i];
-					
-				}
-				else
-				{
-					auxiliar[contador] = elementos[i];
+			for (int i = 0; i < tamanoAct && !encontrado; i++) 
+			{
+				if (dato.equals(elementos[i])) {
+					encontrado = true;
 				}
 				
 			}
 			
-			elementos = auxiliar;
 			
-			return buscado;
+			if (encontrado) {
+				return dato;
+			}
+			return null;
 		}
+
+		public String eliminar(String dato) {
+		
+			String [] auxiliar = new String[tamanoAct];
+			boolean encontrado = false;
+			int tamanoAuxiliar = 0;
+			
+			int contador = 0;
+			
+		for (int i = 0; i <tamanoAct; i++) {
+				if(!dato.equals(elementos[i])){
+					auxiliar[contador] = elementos[i];
+					contador ++;
+					tamanoAuxiliar++;
+				}
+				else
+				{
+				encontrado = true;
+				}
+		}
+			
+		if(!encontrado) return null;
+		int numeroEliminados = tamanoAct - tamanoAuxiliar;
+		
+		
+		if(numeroEliminados == tamanoAct){
+			elementos  = new String[1];
+			tamanoAct = 0;
+			tamanoMax = 1;
+			return dato;
+		}
+		
+		
+		tamanoAct = tamanoAuxiliar;
+		while(tamanoAuxiliar <= tamanoMax/2){
+			tamanoMax = tamanoMax/2;
+		}
+			
+			
+		
+		elementos = new String[tamanoMax];
+		
+		for(int i = 0; i<tamanoAct; i++){
+			elementos[i] = auxiliar[i];
+			}
+		
+		return dato;	
+	}
 }
